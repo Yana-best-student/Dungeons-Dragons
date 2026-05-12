@@ -561,7 +561,7 @@ chromedriver.exe
 geckodriver.exe
 
 # Игнорируем файлы блокировки зависимостей
-requirements.txt
+
 Pipfile.lock
 
 # Игнорируем файлы резервных копий и автосохранений
