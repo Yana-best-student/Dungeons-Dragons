@@ -23,7 +23,7 @@ def get_csrf_and_cookie(API_URL):
     Возвращает кортеж (csrf_token, session_id).
     """
     # Адрес для получения CSRF и cookie (обычно главная страница или /login/)
-    login_page_url = f"{API_URL}api/v1/auth/login/"
+    login_page_url = f"{API_URL}api/v1/auth/logout/"
 
     # Выполняем GET-запрос для получения cookie и CSRF
     response = requests.get(login_page_url)
@@ -38,6 +38,7 @@ def get_csrf_and_cookie(API_URL):
     session_id = response.cookies.get("sessionid")
 
     return csrf_token, session_id
+
 
 @allure.epic("Dungeons & Dragons")
 @allure.severity(allure.severity_level.CRITICAL)
