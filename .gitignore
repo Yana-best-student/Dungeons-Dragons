@@ -517,3 +517,62 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,python,visualstudiocode,test
+# Игнорируем временные файлы истории команд
+*.history
+
+# Игнорируем кэшированные файлы
+*cache*
+
+# Игнорируем конфигурационные файлы пользователей
+.gitconfig
+.config/*
+
+# Игнорируем файлы IDE и редакторы
+*.sublime-project
+*.sublime-workspace
+.idea/
+.project
+.classpath
+.settings/
+target/
+
+# Игнорируем файлы сборки и виртуальных сред
+build/
+dist/
+*.egg-info/
+*.eggs/
+*.pyc
+__pycache__/
+
+# Игнорируем файлы логов и сессий
+*.log
+*.session
+
+# Игнорируем файлы конфигурации тестовых фреймворков
+pytest.ini
+tox.ini
+
+# Игнорируем файлы Docker и контейнеров
+Dockerfile*
+docker-compose.*
+
+# Игнорируем файлы Selenium и WebDriver
+chromedriver.exe
+geckodriver.exe
+
+# Игнорируем файлы блокировки зависимостей
+requirements.txt
+Pipfile.lock
+
+# Игнорируем файлы резервных копий и автосохранений
+*~*
+*.bak
+*.tmp
+*.swp
+*.swo
+*.sav
+
+# Игнорируем файлы журналов и метаданных
+*.mdown
+*.metada.json
+.env
