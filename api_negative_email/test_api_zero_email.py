@@ -22,9 +22,9 @@ HEADERS = {'accept': 'application/json'}
 @allure.epic("Dungeons & Dragons")
 @allure.feature("Авторизация и регистрация")
 @allure.story("Регистрация с недопустимым email")
-@allure.title("Регистрация  email c пустой строкой")
+@allure.title("Регистрация с email c пустой строкой")
 @allure.description("""
-Тест проверяет реакцию системы на попытку регистрации  email c пустой строкой.
+Тест проверяет реакцию системы на попытку регистрации с email c пустой строкой.
 Ожидается отказ регистрации с соответствующим сообщением об ошибке.
 """)
 @allure.tag("Negative", "EmailValidation", "Registration")
@@ -34,7 +34,7 @@ def test_invalid_local_email():
     Ожидается отказ регистрации с сообщением об ошибке.
     """
 
-    # Недопустимый email (без локальной части)
+    # Недопустимый email (пустая строка)
     invalid_email = " "
 
     # Формирование тела запроса
@@ -82,13 +82,16 @@ def test_invalid_local_email():
                    ) > 0, "Список ошибок для email пустой"
 
         # Тексты ошибок могут отличаться в зависимости от локализации
+        # Мы ожидаем, что сообщение об ошибке говорит что email пустой/некорректный.
         possible_errors = [
-            "Введите правильный адрес электронной почты.",  # Русская версия
-            "Enter a valid email address.",  # Английская версия
-            "Enter a valid email address"  # Ещё одна форма английской версии
+            "Email cannot be blank.",  # с точкой
+            "Email cannot be blank"    # без точки
         ]
 
-        # Проверяем, что хотя бы одна из возможных ошибок присутствует в ответе
-        actual_error = response_json["email"][0]
-        assert any(error in actual_error for error in possible_errors), \
-            f"Ожидалось одно из сообщений: {possible_errors}, Получено: '{actual_error}'"
+        # Нормализуем фактическое сообщение: удаляем ведущие/ trailing пробелы и конечную точку
+        actual_error_raw = response_json["email"][0]
+        actual_error_norm = actual_error_raw.strip().rstrip(".")
+
+        # Сравниваем нормализованное сообщение с ожидаемыми формулировками
+        assert any(actual_error_norm == err.rstrip(".") for err in possible_errors), \
+            f"Ожидалось одно из сообщений: {possible_errors}, Получено: '{actual_error_raw}'"
