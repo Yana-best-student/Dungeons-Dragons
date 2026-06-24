@@ -22,20 +22,20 @@ HEADERS = {'accept': 'application/json'}
 @allure.epic("Dungeons & Dragons")
 @allure.feature("Авторизация и регистрация")
 @allure.story("Регистрация с недопустимым email")
-@allure.title("Регистрация  email c пробелами")
+@allure.title("Регистрация  email c пробелами в доменой части")
 @allure.description("""
-Тест проверяет реакцию системы на попытку регистрации  email c пробелами.
+Тест проверяет реакцию системы на попытку регистрации  email c пробелами в доменой части.
 Ожидается отказ регистрации с соответствующим сообщением об ошибке.
 """)
 @allure.tag("Negative", "EmailValidation", "Registration")
 def test_invalid_local_email():
     """
-    Негативный тест регистрации с недопустимым email (c пробелами).
+    Негативный тест регистрации с недопустимым email (c пробелами в доменой части).
     Ожидается отказ регистрации с сообщением об ошибке.
     """
 
     # Недопустимый email (без локальной части)
-    invalid_email = "ivan ov@gmail.com"
+    invalid_email = "sales@sales petroelektro.ru"
 
     # Формирование тела запроса
     payload = {
